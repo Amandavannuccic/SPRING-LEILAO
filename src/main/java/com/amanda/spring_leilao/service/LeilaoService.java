@@ -1,6 +1,7 @@
 package com.amanda.spring_leilao.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -129,35 +130,5 @@ public class LeilaoService {
         }
     }
 
-    @Scheduled(fixedRate = 60000) // Executa a cada 60 segundos
-    public void atualizarStatusLeiloes() {
-        List<Leilao> leiloes = leilaoRepository.findAll();
-        LocalDateTime agora = LocalDateTime.now();
-        LocalDate dataAtual = agora.toLocalDate();
-        LocalTime horaAtual = agora.toLocalTime();
-
-        for (Leilao leilao : leiloes) {
-            LocalDate dataInicial = leilao.getDataInicial().toLocalDate();
-            LocalDate dataFinal = leilao.getDataFinal().toLocalDate();
-            LocalTime horarioInicio = leilao.getHorarioInicio();
-            LocalTime horarioFim = leilao.getHorarioFim();
-
-            if (dataAtual.isBefore(dataInicial)) {
-                leilao.setStatus("EM ABERTO");
-            } else if (dataAtual.isAfter(dataFinal)) {
-                leilao.setStatus("FINALIZADO");
-            } else if (dataAtual.isEqual(dataInicial) || dataAtual.isEqual(dataFinal)) {
-                if (horaAtual.isBefore(horarioInicio)) {
-                    leilao.setStatus("EM ABERTO");
-                } else if (horaAtual.isAfter(horarioFim)) {
-                    leilao.setStatus("FINALIZADO");
-                } else {
-                    leilao.setStatus("EM ANDAMENTO");
-                }
-            } else {
-                leilao.setStatus("EM ANDAMENTO");
-            }
-            leilaoRepository.save(leilao);
-        }
-    }
+   
 }

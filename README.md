@@ -1,6 +1,6 @@
 <h1>Instruções de Execução do Projeto Spring-Leilao</h1>
 
-<p>Este projeto foi desenvolvido para a disciplina de Linguagem de Programação II, ministrada pelo professor Lucas Nadalete na Fatec Prof. Jansen Vidas, em São José dos Campos. Trata-se de uma aplicação Spring Boot que utiliza o banco de dados H2 para armazenamento de dados.</p>
+<p>Este projeto foi desenvolvido para a disciplina de Linguagem de Programação II, ministrada pelo professor Lucas Nadalete na Fatec Prof. Janssen Vidal, em São José dos Campos. Trata-se de uma aplicação Spring Boot que utiliza o banco de dados H2 para armazenamento de dados.</p>
 
 <p>O objetivo do projeto é atender aos requisitos de um leilão conforme as diretrizes solicitadas. <a href="https://github.com/Amandavannuccic/SPRING-LEILAO/blob/main/Diretiz%20de%20projeto%20-%20Spring-Leilao%202024.pdf">Link de acesso às diretrizes</a>.</p>
 

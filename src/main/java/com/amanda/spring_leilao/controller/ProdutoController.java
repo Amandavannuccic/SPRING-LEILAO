@@ -14,9 +14,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.amanda.spring_leilao.dto.ProdutoDTO;
-import com.amanda.spring_leilao.entity.Produto;
+import com.amanda.spring_leilao.entity.*;
 import com.amanda.spring_leilao.service.ProdutoService;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@ToString
+@Data
+@Setter
+@EqualsAndHashCode
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
@@ -60,14 +75,43 @@ public class ProdutoController {
         produtoDTO.setId(produto.getId());
         produtoDTO.setNome(produto.getNome());
         produtoDTO.setPrecoInicial(produto.getPrecoInicial());
+        produtoDTO.setEspecificacoes(produto.getEspecificacoes());
+        produtoDTO.setTipo(produto.getClass().getSimpleName());
         return produtoDTO;
     }
-
+    
     private Produto convertToEntity(ProdutoDTO produtoDTO) {
-        Produto produto = new Produto();
+        Produto produto;
+    
+        String tipo = produtoDTO.getTipo();
+        if (tipo == null) {
+            throw new IllegalArgumentException("Tipo de produto não pode ser nulo");
+        }
+    
+        switch (tipo) {
+            case "Notebook":
+                produto = new Notebook();
+                break;
+            case "Monitor":
+                produto = new Monitor();
+                break;
+            case "Caminhao":
+                produto = new Caminhao();
+                break;
+            case "Carro":
+                produto = new Carro();
+                break;
+            case "Motocicleta":
+                produto = new Motocicleta();
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de produto desconhecido: " + tipo);
+        }
+    
         produto.setId(produtoDTO.getId());
         produto.setNome(produtoDTO.getNome());
         produto.setPrecoInicial(produtoDTO.getPrecoInicial());
+        produto.setEspecificacoes(produtoDTO.getEspecificacoes());
         return produto;
     }
 }

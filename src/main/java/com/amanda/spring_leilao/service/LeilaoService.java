@@ -1,18 +1,13 @@
 package com.amanda.spring_leilao.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.amanda.spring_leilao.dto.LeilaoDTO;
 import com.amanda.spring_leilao.dto.ProdutoDTO;
 import com.amanda.spring_leilao.dto.ClienteDTO;
 import com.amanda.spring_leilao.dto.InstituicaoFinanceiraDTO;
-import com.amanda.spring_leilao.entity.Leilao;
-import com.amanda.spring_leilao.entity.Produto;
-import com.amanda.spring_leilao.entity.Cliente;
-import com.amanda.spring_leilao.entity.InstituicaoFinanceira;
+import com.amanda.spring_leilao.entity.*;
 import com.amanda.spring_leilao.repository.LeilaoRepository;
 
 import jakarta.transaction.Transactional;
@@ -65,7 +60,7 @@ public class LeilaoService {
         leilaoRepository.deleteById(id);
     }
 
-    public LeilaoDTO convertToDTO(Leilao leilao) {
+     public LeilaoDTO convertToDTO(Leilao leilao) {
         LeilaoDTO dto = new LeilaoDTO();
         dto.setId(leilao.getId());
         dto.setDescricao(leilao.getDescricao());
@@ -84,9 +79,26 @@ public class LeilaoService {
         dto.setId(produto.getId());
         dto.setNome(produto.getNome());
         dto.setPrecoInicial(produto.getPrecoInicial());
-        dto.setDtype(produto.getDtype());
-        dto.setTipo(produto.getTipo());
         dto.setLeilaoId(produto.getLeilao().getId());
+    
+        if (produto instanceof Notebook) {
+            Notebook notebook = (Notebook) produto;
+            dto.setEspecificacoes(notebook.getEspecificacoes());
+        } else if (produto instanceof Monitor) {
+            Monitor monitor = (Monitor) produto;
+            dto.setResolucao(monitor.getEspecificacoes());
+        } else if (produto instanceof Caminhao) {
+            Caminhao caminhao = (Caminhao) produto;
+            dto.setCapacidadeCarga(caminhao.getEspecificacoes());
+        } else if (produto instanceof Carro) {
+            Carro carro = (Carro) produto;
+            dto.setModelo(carro.getEspecificacoes());
+            dto.setMarca(carro.getEspecificacoes());
+        } else if (produto instanceof Moto) {
+            Moto motocicleta = (Moto) produto;
+            dto.setCilindrada(motocicleta.getEspecificacoes());
+        }
+    
         return dto;
     }
 
@@ -130,5 +142,5 @@ public class LeilaoService {
         }
     }
 
-   
+
 }

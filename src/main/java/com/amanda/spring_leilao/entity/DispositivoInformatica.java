@@ -17,6 +17,6 @@ import lombok.Setter;
 public class DispositivoInformatica extends Produto {
     
     @Column(name = "TIPO_DISPOSITIVO")
-    private String tipoDispoitivo; // notebook, monitor, etc.
+    private String tipoDispoitivo;
 
 }

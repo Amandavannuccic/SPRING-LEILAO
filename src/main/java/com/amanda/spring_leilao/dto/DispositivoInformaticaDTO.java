@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DispositivoInformaticaDTO extends ProdutoDTO {
 
-    private String tipoDispositivo; // notebook, monitor, etc.
+    private String tipoDispositivo;
 }

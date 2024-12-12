@@ -101,44 +101,33 @@ public class LanceController {
     }
 
     private ProdutoDTO convertToDTO(Produto produto) {
-        if (produto instanceof DispositivoInformatica) {
-            DispositivoInformatica dispositivo = (DispositivoInformatica) produto;
-            DispositivoInformaticaDTO dto = new DispositivoInformaticaDTO();
-            dto.setId(dispositivo.getId());
-            dto.setNome(dispositivo.getNome());
-            dto.setPrecoInicial(dispositivo.getPrecoInicial());
-            dto.setTipo(dispositivo.getTipo());
-            return dto;
-        } else if (produto instanceof Veiculo) {
-            Veiculo veiculo = (Veiculo) produto;
-            VeiculoDTO dto = new VeiculoDTO();
-            dto.setId(veiculo.getId());
-            dto.setNome(veiculo.getNome());
-            dto.setPrecoInicial(veiculo.getPrecoInicial());
-            dto.setTipo(veiculo.getTipo());
-            return dto;
-        }
-        return null;
+        ProdutoDTO produtoDTO = new ProdutoDTO();
+        produtoDTO.setId(produto.getId());
+        produtoDTO.setNome(produto.getNome());
+        produtoDTO.setPrecoInicial(produto.getPrecoInicial());
+        produtoDTO.setEspecificacoes(produto.getEspecificacoes());
+        produtoDTO.setTipo(produto.getClass().getSimpleName());
+        return produtoDTO;
     }
 
     private Produto convertToEntity(ProdutoDTO produtoDTO) {
-        if (produtoDTO instanceof DispositivoInformaticaDTO) {
-            DispositivoInformaticaDTO dto = (DispositivoInformaticaDTO) produtoDTO;
-            DispositivoInformatica dispositivo = new DispositivoInformatica();
-            dispositivo.setId(dto.getId());
-            dispositivo.setNome(dto.getNome());
-            dispositivo.setPrecoInicial(dto.getPrecoInicial());
-            dispositivo.setTipo(dto.getTipo());
-            return dispositivo;
-        } else if (produtoDTO instanceof VeiculoDTO) {
-            VeiculoDTO dto = (VeiculoDTO) produtoDTO;
-            Veiculo veiculo = new Veiculo();
-            veiculo.setId(dto.getId());
-            veiculo.setNome(dto.getNome());
-            veiculo.setPrecoInicial(dto.getPrecoInicial());
-            veiculo.setTipo(dto.getTipo());
-            return veiculo;
+        Produto produto;
+
+        switch (produtoDTO.getTipo()) {
+            case "DispositivoInformatica":
+                produto = new DispositivoInformatica();
+                break;
+            case "Veiculo":
+                produto = new Veiculo();
+                break;
+            default:
+                throw new IllegalArgumentException("Tipo de produto desconhecido: " + produtoDTO.getTipo());
         }
-        return null;
+
+        produto.setId(produtoDTO.getId());
+        produto.setNome(produtoDTO.getNome());
+        produto.setPrecoInicial(produtoDTO.getPrecoInicial());
+        produto.setEspecificacoes(produtoDTO.getEspecificacoes());
+        return produto;
     }
 }

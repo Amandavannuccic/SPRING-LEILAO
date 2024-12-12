@@ -111,23 +111,28 @@ public class LanceController {
     }
 
     private Produto convertToEntity(ProdutoDTO produtoDTO) {
-        Produto produto;
+    Produto produto;
 
-        switch (produtoDTO.getTipo()) {
-            case "DispositivoInformatica":
-                produto = new DispositivoInformatica();
-                break;
-            case "Veiculo":
-                produto = new Veiculo();
-                break;
-            default:
-                throw new IllegalArgumentException("Tipo de produto desconhecido: " + produtoDTO.getTipo());
-        }
-
-        produto.setId(produtoDTO.getId());
-        produto.setNome(produtoDTO.getNome());
-        produto.setPrecoInicial(produtoDTO.getPrecoInicial());
-        produto.setEspecificacoes(produtoDTO.getEspecificacoes());
-        return produto;
+    String tipo = produtoDTO.getTipo();
+    if (tipo == null) {
+        throw new IllegalArgumentException("Tipo de produto não pode ser nulo");
     }
+
+    switch (tipo) {
+        case "DispositivoInformatica":
+            produto = new DispositivoInformatica();
+            break;
+        case "Veiculo":
+            produto = new Veiculo();
+            break;
+        default:
+            throw new IllegalArgumentException("Tipo de produto desconhecido: " + tipo);
+    }
+
+    produto.setId(produtoDTO.getId());
+    produto.setNome(produtoDTO.getNome());
+    produto.setPrecoInicial(produtoDTO.getPrecoInicial());
+    produto.setEspecificacoes(produtoDTO.getEspecificacoes());
+    return produto;
+}
 }

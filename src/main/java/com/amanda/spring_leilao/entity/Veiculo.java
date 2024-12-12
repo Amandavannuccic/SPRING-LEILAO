@@ -1,20 +1,21 @@
 package com.amanda.spring_leilao.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@DiscriminatorValue("Veiculo")
 public class Veiculo extends Produto {
+    private String especificacoes;
 
-    @Column(name = "TIPO_VEICULO")
-    private String tipoVeiculo; // carro, moto, caminhão, etc.
+    @Override
+    public String getEspecificacoes() {
+        return especificacoes;
+    }
+
+    @Override
+    public void setEspecificacoes(String especificacoes) {
+        this.especificacoes = especificacoes;
+    }
 
 }

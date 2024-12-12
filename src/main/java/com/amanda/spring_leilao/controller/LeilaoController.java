@@ -32,12 +32,11 @@ public class LeilaoController {
                 .orElse(null);
     }
 
-     @GetMapping("/date")
+    @GetMapping("/date")
     public List<Leilao> listarLeiloes() {
         return leilaoService.listarLeiloesOrdenadosPorData();
     }
 
-    
     @GetMapping("/exportar/{id}")
     public String exportarLeilao(@PathVariable Long id) {
         try {
@@ -73,7 +72,7 @@ public class LeilaoController {
         dto.setDescricao(leilao.getDescricao());
         dto.setLocal(leilao.getLocal());
         dto.setStatus(leilao.getStatus());
-        // Adicione outros campos conforme necessário
+      
         return dto;
     }
 
@@ -83,7 +82,7 @@ public class LeilaoController {
         leilao.setDescricao(leilaoDTO.getDescricao());
         leilao.setLocal(leilaoDTO.getLocal());
         leilao.setStatus(leilaoDTO.getStatus());
-        // Adicione outros campos conforme necessário
+       
         return leilao;
     }
 }

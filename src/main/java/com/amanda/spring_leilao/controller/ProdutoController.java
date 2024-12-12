@@ -101,8 +101,8 @@ public class ProdutoController {
             case "Carro":
                 produto = new Carro();
                 break;
-            case "Motocicleta":
-                produto = new Motocicleta();
+            case "Moto":
+                produto = new Moto();
                 break;
             default:
                 throw new IllegalArgumentException("Tipo de produto desconhecido: " + tipo);

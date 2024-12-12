@@ -1,9 +1,6 @@
 package com.amanda.spring_leilao.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
@@ -23,14 +20,12 @@ public class ProdutoDTO {
     private String marca; 
     private String cilindrada;
 
-    public void setTipo(String simpleName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setTipo'");
+    // Remova os métodos não implementados e adicione os métodos corretos
+    public String getTipo() {
+        return tipo;
     }
-    public int getTipo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTipo'");
-    } 
 
-    
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }

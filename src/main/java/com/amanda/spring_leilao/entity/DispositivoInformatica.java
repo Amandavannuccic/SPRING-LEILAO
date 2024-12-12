@@ -1,22 +1,30 @@
 package com.amanda.spring_leilao.entity;
 
+import jakarta.persistence.*;
+import lombok.*;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@DiscriminatorValue("DispositivoInformatica")
 public class DispositivoInformatica extends Produto {
-    
-    @Column(name = "TIPO_DISPOSITIVO")
-    private String tipoDispoitivo;
+    private String especificacoes;
 
+    @Override
+    public String getEspecificacoes() {
+        return especificacoes;
+    }
+
+    @Override
+    public void setEspecificacoes(String especificacoes) {
+        this.especificacoes = especificacoes;
+    }
+
+    public Object getTipoDispoitivo() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getTipoDispoitivo'");
+    }
+
+    public void setTipoDispoitivo(Object tipoDispoitivo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'setTipoDispoitivo'");
+    }
 }
